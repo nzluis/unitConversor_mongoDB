@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:10000/api/saved');
+        const response = await axios.get('/api/saved');
         setSaved(response.data);
       } catch (error) {
         console.error('Error getting data ', error);

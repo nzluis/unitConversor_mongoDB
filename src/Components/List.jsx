@@ -10,8 +10,8 @@ export default function List({ saved, setSaved }) {
     const handleClick = async (e, id) => {
         e.preventDefault()
         try {
-            await axios.delete(`http://localhost:10000/api/saved/${id}`)
-            const response = await axios.get('http://localhost:10000/api/saved')
+            await axios.delete(`/api/saved/${id}`)
+            const response = await axios.get('/api/saved')
             setSaved(response.data)
         } catch (error) {
             console.error('Error deleting data', error)
