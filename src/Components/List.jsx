@@ -27,7 +27,7 @@ export default function List({ saved, setSaved }) {
                         <div key={record._id} className="resultCard">
                             <p>{record.input} {record.inputMeasure} &#8594; {record.result} {record.resultMeasure}</p>
                             <a href="" onClick={(e) => handleClick(e, record._id)}>
-                                <img src="/public/imgs/iconmonstr-x-mark-lined-240.png" alt="delete_logo" width="12px" height="12px" />
+                                <img src="../imgs/iconmonstr-x-mark-lined-240.png" alt="delete_logo" width="12px" height="12px" />
                             </a>
                         </div>
                     )

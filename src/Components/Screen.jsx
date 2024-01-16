@@ -83,7 +83,7 @@ export default function Screen({ result, setResult, saved, setSaved }) {
                             </select>
                         </form>
                         <a onClick={(e) => handleSwitch(e)}>
-                            <img src="/public/imgs/exchange-svgrepo-com2.svg" alt="exchange_logo" width="24px" height="24px" />
+                            <img src="../imgs/exchange-svgrepo-com2.svg" alt="exchange_logo" width="24px" height="24px" />
                         </a>
                     </div>
                     <div className='inputGroup'>
@@ -95,7 +95,7 @@ export default function Screen({ result, setResult, saved, setSaved }) {
                 </div>
                 <div className="displayRow">
                     <button className="saveButton" onClick={handleLike}>
-                        <img src="/public/imgs/iconmonstr-favorite-6-240.png" alt="likes_logo" width="24px" height="24px" />
+                        <img src="../imgs/iconmonstr-favorite-6-240.png" alt="likes_logo" width="24px" height="24px" />
                     </button>
                     <div className='resultGroup'>
                         <p>{!isNaN(result) ? result : "0.00"}</p>
