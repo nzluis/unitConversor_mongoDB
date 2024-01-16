@@ -4,13 +4,14 @@ const cors = require('cors');
 const { recordsRouter } = require('./controller/records');
 
 const app = express();
-const PORT = 3000 // || process.env.PORT No tenia mucho sentido crear el dotenv para producción en este ejercicio;
+const PORT = parseInt((process.env.PORT || '3000'), 10)
 
 app.use(express.json())
 app.use(cors({ origin: 'http://localhost:5173' }));
 
 mongoose.connect('mongodb+srv://luisnavarrofs:XUAeksZPbmxWr4xz@cluster0.bdosxvj.mongodb.net/?retryWrites=true&w=majority').then(() => {
-    console.log('connected to mongodb') // igual que en el puerto, en este caso para esconder la url process.env.MONGODB_URL
+    console.log('connected to mongodb') 
+  // para esconder la contraseña en produccion vendría bien usar dotenv y usar la url process.env.MONGODB_URL
   })
   .catch(() => {
     console.log('error mongodb')
