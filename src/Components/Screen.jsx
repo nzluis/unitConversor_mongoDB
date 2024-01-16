@@ -30,8 +30,8 @@ export default function Screen({ result, setResult, saved, setSaved }) {
             resultMeasure: units[1],
         }
         try {
-            await axios.post('http://localhost:3000/api/saved/new', formData);
-            const response = await axios.get('http://localhost:3000/api/saved');
+            await axios.post('http://localhost:10000/api/saved/new', formData);
+            const response = await axios.get('http://localhost:10000/api/saved');
             setSaved(response.data);
             setInputValue("")
         } catch (error) {
