@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "cd server && node server.js",
     "dev": "vite",
-    "build": "vite build",
+    "build": "cd server && pnpm install && cd .. && pnpm install && vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

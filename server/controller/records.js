@@ -14,7 +14,6 @@ recordsRouter.get('/api/saved', async (req, res) => {
 
 recordsRouter.post('/api/saved/new', async (req, res) => {
     try {
-        console.log(req.body)
         const { input, inputMeasure, result, resultMeasure } = req.body;
         const newRecord = new MeasureRecords({
             input,
