@@ -1,7 +1,7 @@
-
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import axios from 'axios'
 
 Screen.propTypes = {
     result: PropTypes.string,
@@ -9,7 +9,6 @@ Screen.propTypes = {
     saved: PropTypes.array,
     setSaved: PropTypes.func
 }
-
 
 export default function Screen({ result, setResult, saved, setSaved }) {
     const modes = ["km_miles", "miles_km", "feet_m", "m_feet", "cm_inches", "inches_cm"]
@@ -20,24 +19,40 @@ export default function Screen({ result, setResult, saved, setSaved }) {
     const [inputValue, setInputValue] = useState("")
     const [toggle, setToggle] = useState(false)
 
-    const modesIndex = modes.indexOf(selectedMode)
-
     const units = selectedMode.split("_")
-    const handleLike = () => {
-        if (inputValue) {
-            setSaved([...saved, [inputValue, units[0], result, units[1]]])
+
+    const handleLike = async (e) => {
+        e.preventDefault()
+        const formData = {
+            input: inputValue,
+            inputMeasure: units[0],
+            result,
+            resultMeasure: units[1],
+        }
+        try {
+            await axios.post('http://localhost:3000/api/saved/new', formData);
+            const response = await axios.get('http://localhost:3000/api/saved');
+            setSaved(response.data);
             setInputValue("")
+        } catch (error) {
+            console.error('Error adding data', error);
         }
     }
-    console.log(0 % 2)
-    const handleSwitch = () => {
+
+    const handleSwitch = (e) => {
+        e.preventDefault()
         setToggle(previousToggle => !previousToggle)
-        modesIndex % 2 === 0 ? setSelectedMode(modes[(modesIndex % 2) + 1]) : setSelectedMode(modes[(modesIndex % 2) - 1])
+        const oppositeModeIndex = modes.indexOf(selectedMode) % 2 === 0
+            ? modes.indexOf(selectedMode) + 1
+            : modes.indexOf(selectedMode) - 1;
+
+        setSelectedMode(modes[oppositeModeIndex]);
         setInputValue(result)
     }
 
     useEffect(() => {
-        setFactor(conversion[modesIndex])
+        const newFactor = conversion[modes.indexOf(selectedMode)];
+        setFactor(newFactor)
         setToggle(false)
     }, [selectedMode]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -55,6 +70,7 @@ export default function Screen({ result, setResult, saved, setSaved }) {
                     <div className="selectMeasure">
                         <form action="#" id="selectForm">
                             <select
+                                name="select"
                                 value={selectedMode}
                                 onChange={e => setSelectedMode(e.target.value)}
                             >
@@ -66,7 +82,7 @@ export default function Screen({ result, setResult, saved, setSaved }) {
                                 <option value="inches_cm" >inches &#8594; cm </option>
                             </select>
                         </form>
-                        <a onClick={handleSwitch}>
+                        <a onClick={(e) => handleSwitch(e)}>
                             <img src="/public/imgs/exchange-svgrepo-com2.svg" alt="exchange_logo" width="24px" height="24px" />
                         </a>
                     </div>

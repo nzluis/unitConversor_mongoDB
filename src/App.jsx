@@ -1,20 +1,26 @@
-// import { useState } from 'react'
 import Header from './Components/Header'
 import Screen from './Components/Screen'
 import List from './Components/List'
 import Footer from './Components/Footer'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function App() {
   const [result, setResult] = useState()
-  const [saved, setSaved] = useState(() => {
-    const savedRecords = JSON.parse(localStorage.getItem('savedRecords'));
-    return savedRecords || []
-  })
+  const [saved, setSaved] = useState()
 
   useEffect(() => {
-    localStorage.setItem('savedRecords', JSON.stringify(saved));
-  }, [saved]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/saved');
+        setSaved(response.data);
+      } catch (error) {
+        console.error('Error getting data ', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>

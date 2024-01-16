@@ -1,20 +1,32 @@
 import PropTypes from 'prop-types';
+import axios from 'axios'
+
+List.propTypes = {
+    saved: PropTypes.array,
+    setSaved: PropTypes.func
+}
 
 export default function List({ saved, setSaved }) {
-    const handleClick = (e, index) => {
+    const handleClick = async (e, id) => {
         e.preventDefault()
-        setSaved(currentSaved => currentSaved.filter((record, i) => i != index))
+        try {
+            await axios.delete(`http://localhost:3000/api/saved/${id}`)
+            const response = await axios.get('http://localhost:3000/api/saved')
+            setSaved(response.data)
+        } catch (error) {
+            console.error('Error deleting data', error)
+        }
     }
 
     return (
         <div className="listContainer">
             <h3 className="listTitle">saved</h3>
             <div className="savedResults">
-                {saved.map((record, index) => {
+                {saved && saved.map((record) => {
                     return (
-                        <div key={index} className="resultCard">
-                            <p>{record[0]} {record[1]} &#8594; {record[2]} {record[3]}</p>
-                            <a href="" onClick={(e) => handleClick(e, index)}>
+                        <div key={record._id} className="resultCard">
+                            <p>{record.input} {record.inputMeasure} &#8594; {record.result} {record.resultMeasure}</p>
+                            <a href="" onClick={(e) => handleClick(e, record._id)}>
                                 <img src="/public/imgs/iconmonstr-x-mark-lined-240.png" alt="delete_logo" width="12px" height="12px" />
                             </a>
                         </div>
@@ -24,9 +36,4 @@ export default function List({ saved, setSaved }) {
             </div>
         </div>
     )
-}
-
-List.propTypes = {
-    saved: PropTypes.array,
-    setSaved: PropTypes.func
 }
