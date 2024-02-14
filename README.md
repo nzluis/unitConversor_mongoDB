@@ -1,8 +1,9 @@
-# React + Vite
+# Unit Converter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ejercicio para Oxygen Academy
 
-Currently, two official plugins are available:
+1) Forkear el repositorio
+2) Ejecutar en la carpeta raíz del proyecto "pnpm run build" y "pnpm run start"
+3) Si se quiere usar modo desarrollador, habría que dirigir el acceso de React a la Api por medio de Localhost:3000 en App.jsx y en los componentes Screen.jsx y List.jsx
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Acceso directo al proyecto en producción](https://unitconversor.onrender.com/)
