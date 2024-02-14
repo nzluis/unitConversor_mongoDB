@@ -206,9 +206,20 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @media only screen and (max-width: 747px) {
-  body {
-    margin: auto 13px
+  .screenContainer,
+  .listContainer {
+    margin: 35px 13px 55px;
+  }
+  .headerContainer {
+    margin-left: 13px;
+  }
+  .savedResults {
+    padding-bottom: 45px;
   }
 }
 
